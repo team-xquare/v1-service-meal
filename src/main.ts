@@ -1,17 +1,18 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import "dotenv/config";
+import { ValidationPipe } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { CoreModule } from "./core.module";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+    const app = await NestFactory.create(CoreModule, { cors: true });
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-    }),
-  );
+    app.useGlobalPipes(
+        new ValidationPipe({
+            transform: true,
+            whitelist: true
+        })
+    );
 
-  await app.listen(3000);
+    await app.listen(3000);
 }
 bootstrap();
