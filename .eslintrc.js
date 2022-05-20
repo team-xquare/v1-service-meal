@@ -21,4 +21,13 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
   },
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [
+          ['@src', './src']
+        ]
+      }
+    }
+  }
 };
