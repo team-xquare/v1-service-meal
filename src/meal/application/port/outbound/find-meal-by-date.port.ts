@@ -4,5 +4,4 @@ export interface FindMealByDatePort {
     findMealByDate(date: Date): Promise<Meal>;
 }
 
-const key = "FindMealByDatePort";
-export default key;
+export const FindMealByDatePortToken = "FindMealByDatePort";
