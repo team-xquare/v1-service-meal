@@ -8,7 +8,7 @@ export class ParseDatePipe implements PipeTransform<Date, Date> {
     }
 
     transform(value: Date, metadata: ArgumentMetadata): Date {
-        const isDates: boolean = value !== new Date(NaN);
+        const isDates: boolean = value.toString() !== "Invalid Date";
 
         if (!isDates) {
             throw this.exceptionFactory("Validation failed (invalid string)");
