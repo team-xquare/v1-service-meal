@@ -5,7 +5,7 @@ export class Meal {
         this.dinner = dinner ? dinner.split("||") : [];
     }
 
-    private breakfast: string[];
-    private lunch: string[];
-    private dinner: string[];
+    breakfast: string[];
+    lunch: string[];
+    dinner: string[];
 }
