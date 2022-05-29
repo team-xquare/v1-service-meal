@@ -48,7 +48,6 @@ $ npm run start:prod
 ## Test
 
 ```bash
-# unit tests
 $ npm run test
 
 # e2e tests
