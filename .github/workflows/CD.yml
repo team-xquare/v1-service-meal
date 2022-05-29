@@ -7,9 +7,11 @@ on:
   push:
     branches:
       - main
-      - "hotfix/**"
-      - "feature/**"
-      - "release/**"
+
+env:
+  SERVICE_NAME: meal
+  SERVICE_TYPE: backend
+  ENVIRONMENT: stage
 
 jobs:
   build:
@@ -49,6 +51,23 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: |
-          jiwoourty/v1-service-meal:latest
-          jiwoourty/v1-service-meal:${{ env.BRANCH_NAME }}
-          
+          hwc9169/meal-backend:${{ github.sha }}
+        build-args : |
+          DATABASE_HOST=${{secrets.DATABASE_HOST_STAGE}}
+          DATABASE_PORT=${{secrets.DATABASE_PORT_STAGE}}
+          DATABASE_USERNAME=${{secrets.DATABASE_USERNAME_STAGE}}
+          DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD_STAGE}}
+          DATABASE_NAME=${{secrets.DATABASE_NAME_STAGE}}
+          DATABASE_SYNCHRONIZE=${{secrets.DATABASE_SYNCHRONIZE_STAGE}}
+
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.GITOPS_DEPLOY_STAGE_TOKEN }}
+        repository: team-xquare/xquare-gitops-repo-staging
+        event-type: update_image
+        client-payload: '{"ref": "${{ github.ref }}", 
+                          "sha": "${{ github.sha }}",
+                          "service_name": "meal",
+                          "service_type": "backend",
+                          "environment": "staging" }'
