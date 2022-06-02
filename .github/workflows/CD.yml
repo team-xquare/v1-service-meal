@@ -51,7 +51,7 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: |
-          hwc9169/meal-backend:${{ github.sha }}
+          xquare/meal-backend:${{ github.sha }}
         build-args : |
           DATABASE_HOST=${{secrets.DATABASE_HOST_STAGE}}
           DATABASE_PORT=${{secrets.DATABASE_PORT_STAGE}}
