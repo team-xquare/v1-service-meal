@@ -50,7 +50,7 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: |
-          xquare/meal-backend:${{ github.sha }}
+          xquare/meal-be:${{ github.sha }}
         build-args : |
           DATABASE_HOST=${{secrets.DATABASE_HOST_STAGE}}
           DATABASE_PORT=${{secrets.DATABASE_PORT_STAGE}}
