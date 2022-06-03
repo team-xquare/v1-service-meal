@@ -10,8 +10,7 @@ on:
 
 env:
   SERVICE_NAME: meal
-  SERVICE_TYPE: backend
-  ENVIRONMENT: stage
+  SERVICE_TYPE: be
 
 jobs:
   build:
@@ -68,6 +67,5 @@ jobs:
         event-type: update_image
         client-payload: '{"ref": "${{ github.ref }}", 
                           "sha": "${{ github.sha }}",
-                          "service_name": "meal",
-                          "service_type": "backend",
-                          "environment": "staging" }'
+                          "service_name": "${{env.SERVICE_NAME}}",
+                          "service_type": "${{env.SERVICE_TYPE}}"}'
