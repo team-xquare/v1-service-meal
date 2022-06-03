@@ -49,8 +49,7 @@ jobs:
         file: ./Dockerfile
         platforms: linux/amd64
         push: true
-        tags: |
-          xquare/meal-be:${{ github.sha }}
+        tags: ${{secrets.DOCKER_USER}}/${{env.SERVICE_NAME}}-${{env.SERVICE_TYPE}}:${{ github.sha }}
         build-args : |
           DATABASE_HOST=${{secrets.DATABASE_HOST_STAGE}}
           DATABASE_PORT=${{secrets.DATABASE_PORT_STAGE}}
