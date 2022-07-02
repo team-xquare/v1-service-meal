@@ -13,16 +13,17 @@ export class MealPersistenceAdaptor implements FindMealByDatePort {
     ) {}
 
     public async findMealByDate(date: Date): Promise<Meal> {
-        const breakfastPromise: Promise<MealTypeOrmEntity> = this.mealRepository.findOne({
-            where: { date: date.toISOString().slice(0, 10), type: 0 }
-        });
-        const lunchPromise: Promise<MealTypeOrmEntity> = this.mealRepository.findOne({
-            where: { date: date.toISOString().slice(0, 10), type: 1 }
-        });
-        const dinnerPromise: Promise<MealTypeOrmEntity> = this.mealRepository.findOne({
-            where: { date: date.toISOString().slice(0, 10), type: 2 }
+        const mealTypeOrmEntities: MealTypeOrmEntity[] = await this.mealRepository.find({
+            where: { date: date.toString() },
+            order: { type: "asc" }
         });
 
-        return new Meal((await breakfastPromise)?.meal, (await lunchPromise)?.meal, (await dinnerPromise)?.meal);
+        // mealTypeOrmEntities.length === 0 && date.getFullYear() === (new Date()).getFullYear()
+
+        return new Meal()
+            .setBreakfast(mealTypeOrmEntities[0]?.meal)
+            .setLunch(mealTypeOrmEntities[1]?.meal)
+            .setDinner(mealTypeOrmEntities[2]?.meal)
+            .build();
     }
 }
