@@ -28,9 +28,9 @@ export class MealPersistenceAdaptor implements FindMealByDatePort, SaveMealPort 
 
     async saveMeal(meal: Meal, date: Date): Promise<void> {
         const breakfastPromise =
-            meal.breakfast && this.mealRepository.save({ date: date.toString(), meal: meal.breakfast.join(), type: 0 });
-        const lunchPromise = meal.lunch && this.mealRepository.save({ date: date.toString(), meal: meal.lunch.join(), type: 1 });
-        const dinnerPromise = meal.dinner && this.mealRepository.save({ date: date.toString(), meal: meal.dinner.join(), type: 2 });
+            meal.breakfast && this.mealRepository.save({ date: date.toString(), meal: meal.breakfast.join("||"), type: 0 });
+        const lunchPromise = meal.lunch && this.mealRepository.save({ date: date.toString(), meal: meal.lunch.join("||"), type: 1 });
+        const dinnerPromise = meal.dinner && this.mealRepository.save({ date: date.toString(), meal: meal.dinner.join("||"), type: 2 });
 
         await breakfastPromise;
         await lunchPromise;
