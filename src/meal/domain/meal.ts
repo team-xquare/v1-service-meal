@@ -5,9 +5,9 @@ export class Meal {
         this.dinner = null;
     }
 
-    private breakfast: string[];
-    private lunch: string[];
-    private dinner: string[];
+    breakfast: string[];
+    lunch: string[];
+    dinner: string[];
 
     setBreakfast(breakfast: string): Meal {
         this.breakfast = breakfast?.split("||") || null;
@@ -26,5 +26,9 @@ export class Meal {
 
     build(): Meal {
         return this;
+    }
+
+    isNull(): boolean {
+        return !this.breakfast && !this.lunch && !this.dinner;
     }
 }
