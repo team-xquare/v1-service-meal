@@ -1,42 +1,32 @@
 import { Module } from "@nestjs/common";
-import { MealController } from "./adaptor/inbound/meal.controller";
-import { MealPersistenceAdaptor } from "@src/meal/adaptor/outbound/persistence/dms/meal-persistence.adaptor";
-import { MealService } from "@src/meal/application/service/meal.service";
+import { MealController } from "./interface/meal.controller";
+import { MealServiceImpl } from "@src/meal/application/service/meal.service.impl";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { MealTypeOrmEntity } from "@src/meal/adaptor/outbound/persistence/dms/entity/meal.entity";
-import { FindMealByDatePortToken } from "@src/meal/application/port/outbound/find-meal-by-date.port";
-import { GetDailyMealUseCaseToken } from "@src/meal/application/port/inbound/get-daily-meal.usecase";
-import { NeisApiAdaptor } from "@src/meal/adaptor/outbound/api/neis/neis-api.adaptor";
-import { GetMealByDatePortToken } from "@src/meal/application/port/outbound/get-meal-by-date.port";
-import { ExistsByDatePortToken } from "@src/meal/application/port/outbound/exists-by-date.port";
-import { SaveMealPortToken } from "@src/meal/application/port/outbound/save-meal.port";
+import { MealEntity } from "@src/infrastructure/repository/entity/meal.entity";
+import { NeisApi } from "@src/infrastructure/api/meal-provider/neis_api/neis-api";
+import { MealServiceToken } from "./application/service/meal.service";
+import { MealProviderToken } from "@src/infrastructure/api/meal-provider/meal-provider";
+import { MealRepositoryToken } from "@src/infrastructure/repository/meal.repository";
+import { MealRepositoryImpl } from "@src/infrastructure/repository/meal.repository.impl";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([MealTypeOrmEntity])],
+    imports: [TypeOrmModule.forFeature([MealEntity])],
     controllers: [MealController],
     providers: [
-        MealPersistenceAdaptor,
-        MealService,
-        NeisApiAdaptor,
+        MealRepositoryImpl,
+        MealServiceImpl,
+        NeisApi,
         {
-            provide: FindMealByDatePortToken,
-            useExisting: MealPersistenceAdaptor
+            provide: MealRepositoryToken,
+            useExisting: MealRepositoryImpl
         },
         {
-            provide: SaveMealPortToken,
-            useExisting: MealPersistenceAdaptor
+            provide: MealServiceToken,
+            useExisting: MealServiceImpl
         },
         {
-            provide: GetDailyMealUseCaseToken,
-            useExisting: MealService
-        },
-        {
-            provide: GetMealByDatePortToken,
-            useExisting: NeisApiAdaptor
-        },
-        {
-            provide: ExistsByDatePortToken,
-            useExisting: NeisApiAdaptor
+            provide: MealProviderToken,
+            useExisting: NeisApi
         }
     ]
 })
