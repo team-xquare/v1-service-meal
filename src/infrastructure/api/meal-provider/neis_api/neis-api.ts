@@ -34,7 +34,7 @@ export class NeisApi implements MealProvider {
              * 잡곡밥5.<br\>들깨수제비국5.6.9.13.<br\>깻잎&쌈무와 같은 형식을
              * 잡곡밥||들깨수제비국||깻잎&쌈무로 바꿉니다
              */
-            const menu: string = row.DDISH_NM.replace(/([0-9]+\.)+/g, "")
+            const menu: string = row.DDISH_NM.replace(/[0-9]+\.+(?=([0-9<]))/g, "")
                 .replace(/\(\)/g, "")
                 .replace(/\s/g, "")
                 .replace(/\./g, "")
