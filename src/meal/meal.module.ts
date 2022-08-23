@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { MealController } from "./interface/meal.controller";
-import { MealServiceImpl } from "@src/meal/application/service/meal.service.impl";
+import { MealServiceImpl } from "@src/meal/application/meal.service.impl";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { MealEntity } from "@src/infrastructure/repository/entity/meal.entity";
 import { NeisApi } from "@src/infrastructure/api/meal-provider/neis_api/neis-api";

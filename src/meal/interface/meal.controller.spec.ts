@@ -1,7 +1,7 @@
 import { Meal } from "../domain/meal";
 import { MealController } from "./meal.controller";
-import { MealService, MealServiceToken } from "../application/service/meal.service";
 import { Test } from "@nestjs/testing";
+import { MealService, MealServiceToken } from "../application/meal.service";
 
 class MockMealService implements MealService {
     public async getDailyMeal(date: Date): Promise<Meal> {

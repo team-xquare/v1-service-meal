@@ -1,6 +1,6 @@
-import { MealService, MealServiceToken } from "../application/service/meal.service";
 import { Controller, Get, Inject, Param } from "@nestjs/common";
 import { Meal } from "@src/meal/domain/meal";
+import { MealService, MealServiceToken } from "../application/meal.service";
 import { ParseDatePipe } from "./parse-date.pipe";
 
 @Controller("meal")
