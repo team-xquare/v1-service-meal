@@ -1,12 +1,8 @@
-import * as dotenv from "dotenv";
-// dotenv.config({ path: ".env" });
-
+import "dotenv/config";
 import { Test } from "@nestjs/testing";
-import { NeisApiClient, NeisApiModule, SchoolInfo } from "@src/global/neis-api/neis-api.module";
+import { NeisApiModule } from "@src/global/neis-api/neis-api.module";
 import { MealProvider, MealProviderToken } from "../meal-provider";
 import { NeisApi } from "./neis-api";
-import Neis from "@my-school.info/neis-api";
-import { ISchoolInfoRow } from "@my-school.info/neis-api/dist/interpaces/response";
 
 describe("NeisApi", () => {
     let mealProvider: MealProvider;
