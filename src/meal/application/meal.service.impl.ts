@@ -15,16 +15,14 @@ export class MealServiceImpl implements MealService {
     ) {}
 
     public async getDailyMeal(date: Date): Promise<Meal> {
-        const meal: Meal = await this.mealRepository.findMealByDate(date);
+        let meal: Meal = await this.mealRepository.findMealByDate(date);
 
         if (meal.isNull() && (await this.mealProvider.existsByDate(date))) {
-            (async () => {
+            meal = await (async () => {
                 const meal = await this.mealProvider.getMealByDate(date);
                 await this.mealRepository.saveMeal(meal, date);
-                return `${date.toString()}: 급식저장완료`;
-            })()
-                .then(console.log)
-                .catch(console.error);
+                return meal;
+            })();
         }
 
         return meal;

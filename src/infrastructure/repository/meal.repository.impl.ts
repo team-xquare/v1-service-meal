@@ -13,16 +13,12 @@ export class MealRepositoryImpl implements MealRepository {
     ) {}
 
     public async findMealByDate(date: Date): Promise<Meal> {
-        const mealTypeOrmEntities: MealEntity[] = await this.mealRepository.find({
+        const mealEntities: MealEntity[] = await this.mealRepository.find({
             where: { date: date.toString() },
             order: { type: "asc" }
         });
 
-        return new Meal()
-            .setBreakfast(mealTypeOrmEntities[0]?.meal)
-            .setLunch(mealTypeOrmEntities[1]?.meal)
-            .setDinner(mealTypeOrmEntities[2]?.meal)
-            .build();
+        return new Meal().setBreakfast(mealEntities[0]?.meal).setLunch(mealEntities[1]?.meal).setDinner(mealEntities[2]?.meal).build();
     }
 
     async saveMeal(meal: Meal, date: Date): Promise<void> {
