@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { MealEntity } from "@src/infrastructure/repository/entity/meal.entity";
 
 @Module({
     imports: [
@@ -12,7 +13,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
             database: process.env.DATABASE_NAME,
             synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
             logging: false,
-            entities: ["dist/**/infrastructure/repository/**/*.entity{.ts,.js}"]
+            entities: [MealEntity]
         })
     ]
 })
