@@ -24,9 +24,18 @@ jobs:
       - run: npm ci
       - run: npm link webpack
       - run: npm run build --if-present
-      - run: npm run test
+      - run: npm run test:cov
+      - run: npm run test:e2e
+        env:
+          DATABASE_HOST: ${{secrets.DATABASE_HOST}}
+          DATABASE_PORT: ${{secrets.DATABASE_PORT}}
+          DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
+          DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+          DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+          NEIS_API_KEY: ${{secrets.NEIS_API_KEY}}
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          
