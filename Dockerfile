@@ -22,7 +22,7 @@ COPY . .
 
 RUN rm package-lock.json
 RUN rm -rf node_modules
-RUN npm install
+RUN npm install  --force
 RUN npm run build
 
 CMD ["npm", "run", "start:prod"]
