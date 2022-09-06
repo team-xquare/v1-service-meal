@@ -16,7 +16,7 @@ async function bootstrap() {
 
     const config = new DocumentBuilder().setTitle("Meal service").addTag("meals").build();
     const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup("api", app, document);
+    SwaggerModule.setup("meals/api", app, document);
 
     app.useGlobalPipes(
         new ValidationPipe({
