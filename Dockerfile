@@ -20,7 +20,7 @@ WORKDIR /home/node/app
 
 COPY . .
 
-RUN npm install
+RUN rm package-lock.json && rm -rf node_modules npm install
 RUN npm run build
 
 CMD ["npm", "run", "start:prod"]
