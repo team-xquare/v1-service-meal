@@ -1,7 +1,8 @@
 import "dotenv/config";
 import { ValidationPipe } from "@nestjs/common";
-import { NestFactory } from "@nestjs/core";
 import { CoreModule } from "./core.module";
+import { NestFactory } from "@nestjs/core";
+import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 
 Date.prototype.toString = function () {
     const year = this.getFullYear();
@@ -12,6 +13,10 @@ Date.prototype.toString = function () {
 
 async function bootstrap() {
     const app = await NestFactory.create(CoreModule, { cors: true });
+
+    const config = new DocumentBuilder().setTitle("Meal service").addTag("meals").build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup("api", app, document);
 
     app.useGlobalPipes(
         new ValidationPipe({
