@@ -1,12 +1,16 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 export class Meal {
     constructor() {
         this.breakfast = null;
         this.lunch = null;
         this.dinner = null;
     }
-
+    @ApiProperty()
     breakfast: string[];
+    @ApiProperty()
     lunch: string[];
+    @ApiProperty()
     dinner: string[];
 
     setBreakfast(breakfast: string): Meal {
