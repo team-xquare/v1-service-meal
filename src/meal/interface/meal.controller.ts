@@ -1,4 +1,4 @@
-import { Controller, Get, Inject, Param } from "@nestjs/common";
+import { Controller, Get, Inject, Param, ParseIntPipe, Query } from "@nestjs/common";
 import { ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Meal } from "@src/meal/domain/meal";
 import { MealService, MealServiceToken } from "../application/meal.service";
@@ -26,5 +26,10 @@ export class MealController {
     })
     public get(@Param("date", new ParseDatePipe()) date: Date): Promise<Meal> {
         return this.mealService.getDailyMeal(date);
+    }
+
+    @Get()
+    public getMonthly(@Query("year", new ParseIntPipe()) year: number, @Query("month", new ParseIntPipe()) month: number) {
+        return this.mealService.getMonthlyMeal(year, month);
     }
 }

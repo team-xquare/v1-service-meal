@@ -1,5 +1,5 @@
 import { MealRepository } from "./meal.repository";
-import { Meal } from "@src/meal/domain/meal";
+import { Meal, MealWithDate } from "@src/meal/domain/meal";
 import { InjectRepository } from "@nestjs/typeorm";
 import { MealEntity } from "@src/infrastructure/repository/entity/meal.entity";
 import { Repository } from "typeorm";
@@ -30,5 +30,29 @@ export class MealRepositoryImpl implements MealRepository {
         await breakfastPromise;
         await lunchPromise;
         await dinnerPromise;
+    }
+
+    async findMealByDateBetween(starDate: Date, endDate: Date): Promise<MealWithDate[]> {
+        const meals = await this.mealRepository.query(
+          `
+            select date,
+                   max(case when (type = 0) then meal end) breakfast,
+                   max(case when (type = 1) then meal end) lunch,
+                   max(case when (type = 2) then meal end) dinner
+              from meal
+             where date between ? and ?
+             group by date;
+        `,
+          [starDate, endDate]
+        );
+
+        return meals.map((meal) => ({
+            date: meal.date.toString(),
+            ...new Meal()
+              .setBreakfast(meal.breakfast)
+              .setLunch(meal.lunch)
+              .setDinner(meal.dinner)
+              .build()
+        }));
     }
 }
