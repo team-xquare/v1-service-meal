@@ -34,7 +34,7 @@ export class MealRepositoryImpl implements MealRepository {
 
     async findMealByDateBetween(starDate: Date, endDate: Date): Promise<MealWithDate[]> {
         const meals = await this.mealRepository.query(
-          `
+            `
             select date,
                    max(case when (type = 0) then meal end) breakfast,
                    max(case when (type = 1) then meal end) lunch,
@@ -43,16 +43,12 @@ export class MealRepositoryImpl implements MealRepository {
              where date between ? and ?
              group by date;
         `,
-          [starDate, endDate]
+            [starDate, endDate]
         );
 
-        return meals.map((meal) => ({
+        return meals.map(meal => ({
             date: meal.date.toString(),
-            ...new Meal()
-              .setBreakfast(meal.breakfast)
-              .setLunch(meal.lunch)
-              .setDinner(meal.dinner)
-              .build()
+            ...new Meal().setBreakfast(meal.breakfast).setLunch(meal.lunch).setDinner(meal.dinner).build()
         }));
     }
 }

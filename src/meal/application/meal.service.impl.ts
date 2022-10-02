@@ -29,9 +29,6 @@ export class MealServiceImpl implements MealService {
     }
 
     public getMonthlyMeal(year: number, month: number): Promise<MealWithDate[]> {
-        return this.mealRepository.findMealByDateBetween(
-          new Date(year, month-1, 2),
-          new Date(year, month)
-        );
+        return this.mealRepository.findMealByDateBetween(new Date(year, month - 1, 2), new Date(year, month));
     }
 }
