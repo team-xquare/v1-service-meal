@@ -9,7 +9,7 @@ import { SentryInterceptor } from "./infrastructure/sentry/interceptor";
 Date.prototype.toString = function () {
     const year = this.getFullYear();
     const month = (this.getMonth() + 1).toString().padStart(2, "0");
-    const date = this.getDate().toString().padStart(2, "0");
+    const date = (this.getDate() - 1).toString().padStart(2, "0");
     return [year, month, date].join("-");
 };
 

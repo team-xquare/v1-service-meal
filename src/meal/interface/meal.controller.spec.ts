@@ -1,4 +1,4 @@
-import { Meal } from "../domain/meal";
+import { Meal, MealWithDate } from "../domain/meal";
 import { MealController } from "./meal.controller";
 import { Test } from "@nestjs/testing";
 import { MealService, MealServiceToken } from "../application/meal.service";
@@ -6,6 +6,10 @@ import { MealService, MealServiceToken } from "../application/meal.service";
 class MockMealService implements MealService {
     public async getDailyMeal(date: Date): Promise<Meal> {
         return null;
+    }
+
+    public async getMonthlyMeal(year: number, month: number): Promise<MealWithDate[]> {
+        return Promise.resolve([]);
     }
 }
 

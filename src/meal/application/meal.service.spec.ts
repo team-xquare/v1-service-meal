@@ -1,7 +1,7 @@
 import { Test } from "@nestjs/testing";
 import { MealProvider, MealProviderToken } from "@src/infrastructure/api/meal-provider/meal-provider";
 import { MealRepository, MealRepositoryToken } from "@src/infrastructure/repository/meal.repository";
-import { Meal } from "../domain/meal";
+import { Meal, MealWithDate } from "../domain/meal";
 import { MealService, MealServiceToken } from "./meal.service";
 import { MealServiceImpl } from "./meal.service.impl";
 
@@ -20,6 +20,10 @@ class MockMealRepository implements MealRepository {
     }
     public async saveMeal(meal: Meal, date: Date): Promise<void> {
         return null;
+    }
+
+    public async findMealByDateBetween(startDate: Date, endDate: Date): Promise<MealWithDate[]> {
+        return Promise.resolve([]);
     }
 }
 

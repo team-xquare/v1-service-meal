@@ -10,7 +10,7 @@ describe("ParseDatePipe", () => {
 
     describe("transform", () => {
         it("should return a Date", async () => {
-            const expected = new Date("2022-08-22")
+            const expected = new Date("2022-08-22");
             const metadata: ArgumentMetadata = {
                 type: "param",
                 metatype: Date,

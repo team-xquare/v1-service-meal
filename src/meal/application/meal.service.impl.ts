@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { MealService } from "./meal.service";
-import { Meal } from "@src/meal/domain/meal";
+import { Meal, MealWithDate } from "@src/meal/domain/meal";
 import { MealRepository, MealRepositoryToken } from "@src/infrastructure/repository/meal.repository";
 import { MealProvider, MealProviderToken } from "@src/infrastructure/api/meal-provider/meal-provider";
 
@@ -26,5 +26,9 @@ export class MealServiceImpl implements MealService {
         }
 
         return meal;
+    }
+
+    public getMonthlyMeal(year: number, month: number): Promise<MealWithDate[]> {
+        return this.mealRepository.findMealByDateBetween(new Date(year, month - 1, 2), new Date(year, month));
     }
 }

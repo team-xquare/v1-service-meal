@@ -36,3 +36,5 @@ export class Meal {
         return !this.breakfast && !this.lunch && !this.dinner;
     }
 }
+
+export type MealWithDate = Meal & { date: string };
