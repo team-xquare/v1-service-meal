@@ -3,6 +3,7 @@ import { MealService } from "./meal.service";
 import { Meal, MealWithDate } from "@src/meal/domain/meal";
 import { MealRepository, MealRepositoryToken } from "@src/infrastructure/repository/meal.repository";
 import { MealProvider, MealProviderToken } from "@src/infrastructure/api/meal-provider/meal-provider";
+import { GetMonthlyMealResponse } from "@src/meal/application/dto/get-monthly-meal.response";
 
 @Injectable()
 export class MealServiceImpl implements MealService {
@@ -28,7 +29,8 @@ export class MealServiceImpl implements MealService {
         return meal;
     }
 
-    public getMonthlyMeal(year: number, month: number): Promise<MealWithDate[]> {
-        return this.mealRepository.findMealByDateBetween(new Date(year, month - 1, 1), new Date(year, month, 0));
+    public getMonthlyMeal(year: number, month: number): Promise<GetMonthlyMealResponse> {
+        return this.mealRepository.findMealByDateBetween(new Date(year, month - 1, 1), new Date(year, month, 0))
+          .then(meals => ({ meals }));
     }
 }
