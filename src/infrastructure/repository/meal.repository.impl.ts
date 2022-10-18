@@ -43,7 +43,7 @@ export class MealRepositoryImpl implements MealRepository {
              where date between ? and ?
              group by date;
         `,
-            [starDate, endDate]
+            [starDate.toString(), endDate.toString()]
         );
 
         return meals.map(meal => ({
