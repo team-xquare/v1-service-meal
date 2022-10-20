@@ -8,7 +8,7 @@ import { Meal } from "@src/meal/domain/meal";
 
 class MockMealEntityRepository {}
 
-describe("MealRepository", () => {
+describe.skip("MealRepository", () => {
     let mealRepository: MealRepository;
     let repository: Repository<MealEntity>;
 

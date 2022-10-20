@@ -4,7 +4,7 @@ import { NeisApiModule } from "@src/global/neis-api/neis-api.module";
 import { MealProvider, MealProviderToken } from "../meal-provider";
 import { NeisApi } from "./neis-api";
 
-describe("NeisApi", () => {
+describe.skip("NeisApi", () => {
     let mealProvider: MealProvider;
 
     beforeEach(async () => {

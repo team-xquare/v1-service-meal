@@ -14,7 +14,7 @@ class MockMealService implements MealService {
     }
 }
 
-describe("MealController", () => {
+describe.skip("MealController", () => {
     let mealController: MealController;
     let mealService: MealService;
 
