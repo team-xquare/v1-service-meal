@@ -28,15 +28,14 @@ jobs:
       - run: npm run test:cov
       - run: npm run test:e2e
         env:
-          DATABASE_HOST: ${{secrets.DATABASE_HOST}}
-          DATABASE_PORT: ${{secrets.DATABASE_PORT}}
-          DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
-          DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
-          DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+          DATABASE_HOST: ${{secrets.DATABASE_HOST_STAGE}}
+          DATABASE_PORT: ${{secrets.DATABASE_PORT_STAGE}}
+          DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME_STAGE}}
+          DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD_STAGE}}
+          DATABASE_NAME: ${{secrets.DATABASE_NAME_STAGE}}
           NEIS_API_KEY: ${{secrets.NEIS_API_KEY}}
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          

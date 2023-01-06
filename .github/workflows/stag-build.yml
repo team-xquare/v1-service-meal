@@ -58,12 +58,6 @@ jobs:
           DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD_STAGE}}
           DATABASE_NAME=${{secrets.DATABASE_NAME_STAGE}}
           DATABASE_SYNCHRONIZE=${{secrets.DATABASE_SYNCHRONIZE_STAGE}}
-          DATABASE_HOST=${{secrets.DATABASE_HOST_STAGE}}
-          DATABASE_PORT=${{secrets.DATABASE_PORT_STAGE}}
-          DATABASE_USERNAME=${{secrets.DATABASE_USERNAME_STAGE}}
-          DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD_STAGE}}
-          DATABASE_NAME=${{secrets.DATABASE_NAME_STAGE}}
-          DATABASE_SYNCHRONIZE=${{secrets.DATABASE_SYNCHRONIZE_STAGE}}
 
     - name: Repository Dispatch
       uses: peter-evans/repository-dispatch@v1
