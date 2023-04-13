@@ -56,12 +56,12 @@ jobs:
         registry: ${{ steps.ecr.outputs.registry }}
         tags: ${{ steps.get_version.outputs.VERSION }}
         buildargs: |
-          DATABASE_HOST=${{secrets.DATABASE_HOST}}
-          DATABASE_PORT=${{secrets.DATABASE_PORT}}
-          DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}}
-          DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD}}
-          DATABASE_NAME=${{secrets.DATABASE_NAME}}
-          DATABASE_SYNCHRONIZE=${{secrets.DATABASE_SYNCHRONIZE}}
+          DATABASE_HOST=${{ secrets.DATABASE_HOST }}
+          DATABASE_PORT=${{ secrets.DATABASE_PORT }}
+          DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
+          DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_NAME=${{ secrets.DATABASE_NAME }}
+          DATABASE_SYNCHRONIZE=${{ secrets.DATABASE_SYNCHRONIZE }}
 
     - name: Repository Dispatch
       uses: peter-evans/repository-dispatch@v1
