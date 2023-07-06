@@ -19,7 +19,15 @@ export class MealRepositoryImpl implements MealRepository {
             order: {type: "asc"}
         });
 
-        return new Meal().setBreakfast(mealEntities[0]?.meal).setLunch(mealEntities[1]?.meal).setDinner(mealEntities[2]?.meal).build();
+        const meals = new Meal();
+        mealEntities.map(meal => {
+            switch (meal.type) {
+                case 0 : meals.setBreakfast(meal.meal)
+                case 1 : meals.setLunch(meal.meal)
+                case 2 : meals.setDinner(meal.meal)
+            }
+        })
+        return meals.build();
     }
 
     async saveMeal(meal: Meal, date: Date): Promise<void> {
