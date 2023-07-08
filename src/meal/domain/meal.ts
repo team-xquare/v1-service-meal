@@ -26,7 +26,7 @@ export class Meal {
     dinner_kcal: string;
 
     setBreakfast(breakfast: string): Meal {
-        if(!breakfast) return this;
+        if (!breakfast) return this;
 
         const menu: string[] = breakfast?.split("||");
         this.breakfast_kcal = menu.pop();
@@ -35,16 +35,16 @@ export class Meal {
     }
 
     setLunch(lunch: string): Meal {
-        if(!lunch) return this;
+        if (!lunch) return this;
 
         const menu: string[] = lunch?.split("||");
-        this.lunch_kcal  = menu.pop();
+        this.lunch_kcal = menu.pop();
         this.lunch = menu;
         return this;
     }
 
     setDinner(dinner: string): Meal {
-        if(!dinner) return this;
+        if (!dinner) return this;
 
         const menu: string[] = dinner?.split("||");
         this.dinner_kcal = menu.pop();
