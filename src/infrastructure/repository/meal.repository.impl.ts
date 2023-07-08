@@ -1,32 +1,39 @@
-import {MealRepository} from "./meal.repository";
-import {Meal, MealWithDate} from "@src/meal/domain/meal";
-import {InjectRepository} from "@nestjs/typeorm";
-import {MealEntity} from "@src/infrastructure/repository/entity/meal.entity";
-import {Repository} from "typeorm";
-import {Injectable} from "@nestjs/common";
+import { MealRepository } from "./meal.repository";
+import { Meal, MealWithDate } from "@src/meal/domain/meal";
+import { InjectRepository } from "@nestjs/typeorm";
+import { MealEntity } from "@src/infrastructure/repository/entity/meal.entity";
+import { Repository } from "typeorm";
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class MealRepositoryImpl implements MealRepository {
     constructor(
         @InjectRepository(MealEntity)
         private readonly mealRepository: Repository<MealEntity>
-    ) {
-    }
+    ) {}
 
     public async findMealByDate(date: Date): Promise<Meal> {
         const mealEntities: MealEntity[] = await this.mealRepository.find({
-            where: {date: date.toString()},
-            order: {type: "asc"}
+            where: { date: date.toString() },
+            order: { type: "asc" }
         });
 
         const meals = new Meal();
+
         mealEntities.map(meal => {
             switch (meal.type) {
-                case 0 : meals.setBreakfast(meal.meal)
-                case 1 : meals.setLunch(meal.meal)
-                case 2 : meals.setDinner(meal.meal)
+                case 0:
+                    meals.setBreakfast(meal.meal);
+                    break;
+                case 1:
+                    meals.setLunch(meal.meal);
+                    break;
+                case 2:
+                    meals.setDinner(meal.meal);
+                    break;
             }
-        })
+        });
+
         return meals.build();
     }
 

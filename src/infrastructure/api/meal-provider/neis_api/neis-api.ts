@@ -10,7 +10,6 @@ export class NeisApi implements MealProvider {
     constructor(
         @Inject(NeisApiClient)
         private readonly neisApiClient: Neis,
-
         @Inject(SchoolInfo)
         private readonly schoolInfo: ISchoolInfoRow
     ) {}
@@ -38,6 +37,7 @@ export class NeisApi implements MealProvider {
                 .replace(/\(\)/g, "")
                 .replace(/\s/g, "")
                 .replace(/\./g, "")
+                .replace(/\(\d+\)/g, "")
                 .split("<br/>")
                 .concat(row.CAL_INFO)
                 .join("||");
