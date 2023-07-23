@@ -1,0 +1,43 @@
+name: Node.js Build
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: rm package-lock.json && rm -rf node_modules && npm install
+    - run: npm ci
+    - run: npm link webpack
+    - run: npm run build --if-present
+    - run: npm test
+    
+    - name: Deploy to xquare
+      uses: team-xquare/xquare-deployment-action@master 
+      with:
+        environment: stag
+        xquare_role_arn: ${{ secrets.XQUARE_ROLE_ARN }}
+        github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        buildargs: |
+          DATABASE_HOST=${{ secrets.DATABASE_HOST }}
+          DATABASE_PORT=${{ secrets.DATABASE_PORT }}
+          DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
+          DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_NAME=${{ secrets.DATABASE_NAME }}
+          DATABASE_SYNCHRONIZE=${{ secrets.DATABASE_SYNCHRONIZE }}
