@@ -1,0 +1,4 @@
+config:
+  name: meal
+  prefix: /meals
+  service_type: be
