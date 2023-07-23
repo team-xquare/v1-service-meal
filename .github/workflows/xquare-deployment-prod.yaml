@@ -7,9 +7,10 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    permissions:
+      id-token: write
+      contents: read
     strategy:
       matrix:
         node-version: [14.x]
