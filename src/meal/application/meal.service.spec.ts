@@ -14,7 +14,7 @@ class MockMealProvider implements MealProvider {
     }
 
     public async saveMonthlyMeal() {
-        null;
+        return null;
     }
 }
 
