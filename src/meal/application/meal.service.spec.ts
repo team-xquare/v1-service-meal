@@ -12,6 +12,10 @@ class MockMealProvider implements MealProvider {
     public async existsByDate(date: Date): Promise<boolean> {
         return null;
     }
+
+    public async saveMonthlyMeal() {
+        null;
+    }
 }
 
 class MockMealRepository implements MealRepository {
