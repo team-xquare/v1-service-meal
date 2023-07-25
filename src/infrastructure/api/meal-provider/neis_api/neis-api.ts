@@ -44,10 +44,7 @@ export class NeisApi implements MealProvider {
 
     replaceMenu(row: IMealInfoRow): string {
         return row.DDISH_NM.replace(/([0-9]{1,5}\.)+/g, "")
-            .replace(/\(\)/g, "")
-            .replace(/\s/g, "")
-            .replace(/\./g, "")
-            .replace(/\(\d+\)/g, "")
+            .replace(/\(\)|\s|\(\d+\)|\./g, "")
             .split("<br/>")
             .concat(row.CAL_INFO)
             .join("||");
