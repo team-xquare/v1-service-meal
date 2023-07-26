@@ -3,6 +3,7 @@ import { ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Meal } from "@src/meal/domain/meal";
 import { MealService, MealServiceToken } from "../application/meal.service";
 import { ParseDatePipe } from "./parse-date.pipe";
+import { GetDailyMealResponse } from "@src/meal/application/dto/get-daily-meal.response";
 
 @ApiTags("meals")
 @Controller("meals")
@@ -24,7 +25,7 @@ export class MealController {
         description: "Get meal of specific date",
         type: Meal
     })
-    public get(@Param("date", new ParseDatePipe()) date: Date): Promise<Meal> {
+    public get(@Param("date", new ParseDatePipe()) date: Date): Promise<GetDailyMealResponse> {
         return this.mealService.getDailyMeal(date);
     }
 
