@@ -4,6 +4,7 @@ import { Meal, MealWithDate } from "@src/meal/domain/meal";
 import { MealRepository, MealRepositoryToken } from "@src/infrastructure/repository/meal.repository";
 import { MealProvider, MealProviderToken } from "@src/infrastructure/api/meal-provider/meal-provider";
 import { GetMonthlyMealResponse } from "@src/meal/application/dto/get-monthly-meal.response";
+import { GetDailyMealResponse } from "@src/meal/application/dto/get-daily-meal.response";
 
 @Injectable()
 export class MealServiceImpl implements MealService {
@@ -15,7 +16,7 @@ export class MealServiceImpl implements MealService {
         private readonly mealRepository: MealRepository
     ) {}
 
-    public async getDailyMeal(date: Date): Promise<Meal> {
+    public async getDailyMeal(date: Date): Promise<GetDailyMealResponse> {
         let meal: Meal = await this.mealRepository.findMealByDate(date);
 
         if (meal.isNull() && (await this.mealProvider.existsByDate(date))) {
@@ -26,11 +27,11 @@ export class MealServiceImpl implements MealService {
             })();
         }
 
-        return meal;
+        const dateString: string = date.toString();
+        return { ...meal, date: dateString };
     }
 
     public getMonthlyMeal(year: number, month: number): Promise<GetMonthlyMealResponse> {
-        return this.mealRepository.findMealByDateBetween(new Date(year, month - 1, 1), new Date(year, month, 0))
-          .then(meals => ({ meals }));
+        return this.mealRepository.findMealByDateBetween(new Date(year, month - 1, 1), new Date(year, month, 0)).then(meals => ({ meals }));
     }
 }
