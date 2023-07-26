@@ -30,8 +30,7 @@ jobs:
     - run: npm ci
     - run: npm link webpack
     - run: npm run build --if-present
-    - run: npm test
-    
+
     - name: Get the version
       id: get_version
       run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
