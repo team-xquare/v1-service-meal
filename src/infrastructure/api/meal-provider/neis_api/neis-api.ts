@@ -22,7 +22,7 @@ export class NeisApi implements MealProvider {
         const currentDate = new Date();
         const lastDateOfMonth = this.getLastDateOfMonth(currentDate.getFullYear(), currentDate.getMonth());
         const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-        for (let i = 1; i < lastDateOfMonth; i++) {
+        for (let i = 1; i <= lastDateOfMonth; i++) {
             firstDayOfMonth.setDate(i);
             const rows: IMealInfoRow[] = await this.getNeisMealInfo(firstDayOfMonth);
 
