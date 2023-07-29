@@ -27,8 +27,7 @@ export class MealServiceImpl implements MealService {
             })();
         }
 
-        const dateString: string = date.toString();
-        return { ...meal, date: dateString };
+        return { ...meal, date: date.toString() };
     }
 
     public getMonthlyMeal(year: number, month: number): Promise<GetMonthlyMealResponse> {
