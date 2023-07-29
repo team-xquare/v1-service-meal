@@ -49,7 +49,10 @@ export class NeisApi implements MealProvider {
          * 잡곡밥||들깨수제비국||깻잎&쌈무로 바꿉니다
          */
         return row.DDISH_NM.replace(/([0-9]{1,5}\.)+/g, "")
-            .replace(/\(\)|\s|\(\d+\)|\./g, "")
+            .replace(/\(\)/g, "")
+            .replace(/\s/g, "")
+            .replace(/\./g, "")
+            .replace(/\(\d+\)/g, "")
             .split("<br/>")
             .concat(row.CAL_INFO)
             .join("||");
