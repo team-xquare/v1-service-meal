@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { MealService } from "./meal.service";
-import { Meal, MealWithDate } from "@src/meal/domain/meal";
+import { Meal } from "@src/meal/domain/meal";
 import { MealRepository, MealRepositoryToken } from "@src/infrastructure/repository/meal.repository";
 import { MealProvider, MealProviderToken } from "@src/infrastructure/api/meal-provider/meal-provider";
 import { GetMonthlyMealResponse } from "@src/meal/application/dto/get-monthly-meal.response";
@@ -11,7 +11,6 @@ export class MealServiceImpl implements MealService {
     constructor(
         @Inject(MealProviderToken)
         private readonly mealProvider: MealProvider,
-
         @Inject(MealRepositoryToken)
         private readonly mealRepository: MealRepository
     ) {}
