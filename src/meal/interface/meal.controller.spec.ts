@@ -1,12 +1,13 @@
-import { Meal, MealWithDate } from "../domain/meal";
+import { Meal } from "../domain/meal";
 import { MealController } from "./meal.controller";
 import { Test } from "@nestjs/testing";
 import { MealService, MealServiceToken } from "../application/meal.service";
 import { GetMonthlyMealResponse } from "@src/meal/application/dto/get-monthly-meal.response";
+import { GetDailyMealResponse } from "@src/meal/application/dto/get-daily-meal.response";
 
 class MockMealService implements MealService {
-    public async getDailyMeal(date: Date): Promise<Meal> {
-        return null;
+    public async getDailyMeal(date: Date): Promise<GetDailyMealResponse> {
+        return Promise.resolve(undefined);
     }
 
     getMonthlyMeal(year: number, month: number): Promise<GetMonthlyMealResponse> {
@@ -35,13 +36,13 @@ describe.skip("MealController", () => {
 
     describe("get", () => {
         it("should return a menu", async () => {
-            jest.spyOn(mealService, "getDailyMeal").mockImplementation(async (date: Date): Promise<Meal> => {
+            jest.spyOn(mealService, "getDailyMeal").mockImplementation(async (date: Date): Promise<GetDailyMealResponse> => {
                 const meal = new Meal();
                 meal.setBreakfast("a||b||c||d");
                 meal.setLunch("a||b||c||d");
                 meal.setDinner("a||b||c||d");
 
-                return meal;
+                return { ...meal, date: date.toString() };
             });
 
             expect(await mealController.get(new Date("2022-08-22"))).toEqual({
