@@ -43,7 +43,7 @@ export class NeisApi implements MealProvider {
     }
 
     replaceMenu(row: IMealInfoRow): string {
-        /**
+        /*
          * neis 데이터셋의 급식 code 아침: 1, 점심: 2, 저녁: 3
          * 잡곡밥5.<br\>들깨수제비국5.6.9.13.<br\>깻잎&쌈무와 같은 형식을
          * 잡곡밥||들깨수제비국||깻잎&쌈무로 바꿉니다
