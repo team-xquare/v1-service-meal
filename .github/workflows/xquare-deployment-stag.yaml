@@ -39,5 +39,5 @@ jobs:
           DATABASE_PORT=${{ secrets.DATABASE_PORT }}
           DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
           DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_NAME=${{ secrets.DATABASE_NAME }}
+          DATABASE_NAME=stag_${{ secrets.DATABASE_NAME }}
           DATABASE_SYNCHRONIZE=${{ secrets.DATABASE_SYNCHRONIZE }}
