@@ -41,3 +41,4 @@ jobs:
           DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
           DATABASE_NAME=prod_${{ secrets.DATABASE_NAME }}
           DATABASE_SYNCHRONIZE=${{ secrets.DATABASE_SYNCHRONIZE }}
+          NEIS_API_KEY=${{secrets.NEIS_API_KEY}}
