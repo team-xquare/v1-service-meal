@@ -3,7 +3,7 @@ name: Xquare Deploy for Stage
 on:
   push:
     branches:
-      - main
+      - main 
 
 jobs:
   build:
