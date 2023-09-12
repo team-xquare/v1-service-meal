@@ -103,11 +103,6 @@ export class NeisApi implements MealProvider {
     }
 
     async existsByDate(date: Date): Promise<boolean> {
-        try {
-            await this.getNeisMealInfo(date);
-            return true;
-        } catch (e) {
-            return false;
-        }
+        return (await this.getNeisMealInfo(date)) != undefined;
     }
 }
