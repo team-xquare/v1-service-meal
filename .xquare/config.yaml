@@ -3,4 +3,3 @@ config:
   prefix: /meals
   service_type: be
   port: 3000
-
